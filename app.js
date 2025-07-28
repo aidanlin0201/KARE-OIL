@@ -1,6 +1,7 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbxGp2LS9yndsCkFmcpnw1nRaSNsDR38eR7rAyWjnCzcP6zVpjifx6NygDOtzE6W7_Eb/exec";
 const oilList = document.getElementById("oil-list");
 const saveBtn = document.getElementById("saveBtn");
+const searchInput = document.getElementById("search");
 let oils = [];
 
 async function fetchData() {
@@ -37,9 +38,23 @@ function renderList(data) {
   `).join("");
 }
 
+// 搜尋功能
+searchInput.addEventListener("input", () => {
+  const keywords = searchInput.value.split(",").map(k => k.trim()).filter(k => k);
+  if (!keywords.length) {
+    renderList(oils);
+    return;
+  }
+  const filtered = oils.filter(oil => 
+    keywords.some(k => oil.name.includes(k) || oil.en.toLowerCase().includes(k.toLowerCase()))
+  );
+  renderList(filtered);
+});
+
+// 保存功能
 saveBtn.addEventListener("click", async () => {
   try {
-    const payload = {keywords: "測試", oils: "測試精油", total: 0};
+    const payload = {keywords: searchInput.value, oils: "測試精油", total: 0};
     const res = await fetch(API_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},

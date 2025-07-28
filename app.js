@@ -1,4 +1,4 @@
-const API_URL = "你的 Web App /exec URL";
+const API_URL = "https://script.google.com/macros/s/AKfycbw91gK-c2-zhJ3yZ4oKRVBHQ1bR_5wtu-CrK24te4KBKNXD24l8v2bpHO-3kB9Yc459/exec";
 const oilList = document.getElementById("oil-list");
 const blendList = document.getElementById("blend-list");
 const blendTotal = document.getElementById("blend-total");

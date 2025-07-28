@@ -1,4 +1,4 @@
-const API_URL = "貼上你最新的 Apps Script URL";
+const API_URL = "https://script.google.com/macros/s/AKfycbxO0iyIgeQUZLpU5XaDPoT4IpJdfU8tZh-62dewuxI/dev";
 const oilList = document.getElementById("oil-list");
 const blendList = document.getElementById("blend-list");
 const blendTotal = document.getElementById("blend-total");

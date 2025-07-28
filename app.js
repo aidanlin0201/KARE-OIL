@@ -1,5 +1,5 @@
 
-const API_URL = "https://script.google.com/macros/s/AKfycbySIKGUjGxw24EDz_Cs7TNpZJK0RBnAoOgTYHDlyoPrSVTfkGduuOQxKv9sgovetzph/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyxcG9rNGPzwBwhoy30N5-9xkY_znc1MwVpO-AmSFYcB30Zu3rbusRtbnimkrZPN5F9/exec";
 const oilList = document.getElementById("oil-list");
 const blendList = document.getElementById("blend-list");
 const blendTotal = document.getElementById("blend-total");

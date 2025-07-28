@@ -6,6 +6,7 @@ async function fetchData() {
   try {
     const res = await fetch(API_URL);
     const text = await res.text();
+    console.log("API回應：", text);
     const result = JSON.parse(text);
 
     if (result.status === "success") {
@@ -14,12 +15,13 @@ async function fetchData() {
         en: row["英文名稱"] || "",
         detail: row
       }));
+      console.log("載入的精油數量：", oils.length);
       renderList(oils);
     } else {
       oilList.innerHTML = `<p style="color:red;">載入失敗：${result.message}</p>`;
     }
   } catch (err) {
-    oilList.innerHTML = `<p style="color:red;">讀取資料時發生錯誤：${err.message}</p>`;
+    oilList.innerHTML = `<p style="color:red;">讀取資料錯誤：${err.message}</p>`;
   }
 }
 

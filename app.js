@@ -1,5 +1,6 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbxGp2LS9yndsCkFmcpnw1nRaSNsDR38eR7rAyWjnCzcP6zVpjifx6NygDOtzE6W7_Eb/exec";
 const oilList = document.getElementById("oil-list");
+const saveBtn = document.getElementById("saveBtn");
 let oils = [];
 
 async function fetchData() {
@@ -8,14 +9,12 @@ async function fetchData() {
     const text = await res.text();
     console.log("API回應：", text);
     const result = JSON.parse(text);
-
     if (result.status === "success") {
       oils = result.data.map(row => ({
         name: row["中文名稱"] || "未命名",
         en: row["英文名稱"] || "",
         detail: row
       }));
-      console.log("載入的精油數量：", oils.length);
       renderList(oils);
     } else {
       oilList.innerHTML = `<p style="color:red;">載入失敗：${result.message}</p>`;
@@ -25,7 +24,6 @@ async function fetchData() {
   }
 }
 
-// 渲染清單
 function renderList(data) {
   if (!data.length) {
     oilList.innerHTML = "<p>沒有資料</p>";
@@ -38,5 +36,20 @@ function renderList(data) {
     </div>
   `).join("");
 }
+
+saveBtn.addEventListener("click", async () => {
+  try {
+    const payload = {keywords: "測試", oils: "測試精油", total: 0};
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    alert(result.status === "success" ? "保存成功" : "保存失敗");
+  } catch (err) {
+    alert("保存錯誤：" + err.message);
+  }
+});
 
 fetchData();
